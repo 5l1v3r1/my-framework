@@ -8,6 +8,8 @@ from core import interpreter
 import colorlog
 import logging
 
+codename = 'zvtyrdt.id'
+
 def setup_logger():
     """Return a logger with a default ColoredFormatter."""
     formatter = colorlog.ColoredFormatter(
@@ -29,9 +31,7 @@ def setup_logger():
 
     return logger
 
-def banner():
-    return 'Thanks, I hate it'
-
+logger = setup_logger()
 if __name__ == '__main__':
-    print(banner())
-    interpreter.run(setup_logger())
+    logger.info('run as interactive shell, type help for more information!')
+    interpreter.run(logger, codename)
