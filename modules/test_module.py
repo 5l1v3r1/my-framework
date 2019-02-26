@@ -9,6 +9,8 @@ def run(string, logging):
 def __init__(string, logging): # bisa menambahkan parameter logging kalau mau ganti print jadi logging
     """
     Ini untuk default value nya , format samain kek dibawah
+    Semua parameter wajib diisi selain logging, None untuk value kosong
+    
     :> string: default value
     """
     run(string, logging)
