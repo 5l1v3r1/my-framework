@@ -8,7 +8,7 @@ from core import interpreter
 import colorlog
 import logging
 
-codename = 'zvtyrdt.id'
+codename = 'zvm'
 
 def setup_logger():
     """Return a logger with a default ColoredFormatter."""
