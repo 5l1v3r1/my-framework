@@ -29,5 +29,9 @@ def setup_logger():
 
     return logger
 
+def banner():
+    return 'Thanks, I hate it'
+
 if __name__ == '__main__':
+    print(banner())
     interpreter.run(setup_logger())
