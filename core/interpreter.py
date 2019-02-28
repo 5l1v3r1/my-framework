@@ -30,9 +30,23 @@ def setup_logger():
 
 class run(object):
     # <-- basic -->
-    def _get_default(self, module):
-        return (dict(re.findall(r'(?i):> (.*?): (.*?)\n',
-              open('modules/{}.py'.format(module)).read())))
+    def _get_default(self):
+        # <-- get parameter and value -->
+        default = build_exec.Build('modules/{}.py'.format(self.name))[0]
+        temp = dict(re.findall(r'(?i):> (.*?): (.*?)\n',
+                open('modules/{}.py'.format(self.name)).read()))
+
+        # <-- check again -->
+        if temp:
+            for value in temp:
+                if value in list(default.keys()):
+                    default[value] = temp[value]
+
+        if 'logging' in list(default.keys()):
+            default['logging'] = self.logger
+
+        # <-- returning data -->
+        return default
 
     def _print_modules(self):
         f.modules(self.modules)
@@ -61,12 +75,7 @@ class run(object):
 
     # <-- load -->
     def _load_module(self):
-        self.default = (self._get_default(self.name))
-        if not self.default:
-            self.default = build_exec.Build('modules/{}.py'.format(self.name))[0]
-        if 'logging' in list(self.default.keys()):
-            self.default['logging'] = self.logger
-
+        self.default = self._get_default()
         subcommand = {'help': self._print_sub_help,
                       'show': self._print_options }
 
@@ -133,14 +142,19 @@ class run(object):
                         'modules': self._print_modules,
                         'exit': exit}
 
-        self.logger.info('run as interactive shell, type help for more information!')
-        while True:
-            inp = input('{0} >> '.format(self.codename))
+        try:
+            self.logger.info('run as interactive shell, type help for more information!')
+            while True:
+                inp = input('{0} >> '.format(self.codename))
 
-            if inp in self.command:
-                self.command[inp]()
+                if inp in self.command:
+                    self.command[inp]()
 
-            elif inp in self.zerodiv:
-                self.name = inp[4:]
-                self.logger.info('load module %s', self.name)
-                self._load_module()
+                elif inp in self.zerodiv:
+                    self.name = inp[4:]
+                    self.logger.info('load module %s', self.name)
+                    self._load_module()
+        except KeyboardInterrupt:
+            self.logger.error('interrupt by user.. exiting')
+        except Exception as e:
+            self.logger.critical(str(e))
