@@ -5,7 +5,7 @@ import re
 
 # <-- listing files -->
 def _check(file):
-    if os.isfile(file):
+    if os.path.isfile(file):
         cnt = open(file).read()
         return re.search(r'def __init__\(.*?\)', cnt)
 
