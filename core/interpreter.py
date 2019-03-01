@@ -1,5 +1,6 @@
 from . import formatter
 from . import build_exec
+import sys
 import re
 import logging
 import colorlog
@@ -126,7 +127,6 @@ class run(object):
 
                     # finnaly <-- executing script -->
                     try:
-                        print (imp)
                         exec (imp)
                     except Exception as e:
                         self.logger.critical(str(e))
@@ -143,6 +143,10 @@ class run(object):
         self.codename = cde
         self.logger = setup_logger()
         self.modules = formatter.listing_files('modules')
+        if not self.modules:
+            self.logger.warning('module not found !!')
+            sys.exit(self.logger.info("tips: create a 'modules' folder and add a new module there"))
+
         self.zerodiv = ['use {}'.format(ex) for ex in self.modules]
         self.command = {'help': self._print_help,
                         'modules': self._print_modules,
