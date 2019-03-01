@@ -83,11 +83,8 @@ class run(object):
         if len(mod) >= 2:
             text = '{0} {1}(\x1b[31m{2}\x1b[0m) >> '.format(
                          self.codename, '.'.join(mod[0:-1]), mod[-1])
-            imp = 'from modules.{0} import {1}; {1}.__init__('.format(
-                         '.'.join(mod[0:-1]), mod[-1])
         else:
             text = '{0} general(\x1b[31m{1}\x1b[0m) >> '.format(self.codename, self.name)
-            imp = 'from modules import {0}; {0}.__init__('.format(mod[0])
 
         while True:
             inp = input(text)
@@ -109,6 +106,14 @@ class run(object):
                 if self._check_parameter(self.default):
                     self.logger.info('executing script')
 
+                    # first ( reinitializing ) <-- generating script -->
+                    if len(mod) >= 2:
+                        imp = 'from modules.{0} import {1}; {1}.__init__('.format(
+                             '.'.join(mod[0:-1]), mod[-1])
+                    else:
+                        imp = 'from modules import {0}; {0}.__init__('.format(mod[0])
+
+
                     # <-- generating script -->
                     imp += ', '.join(['{0}="{1}"'.format(i, self.default[i]) for i in self.default])
                     if re.search('def __init__\(.*?, logging\)', open('modules/{}.py'.format(self.name)).read()):
@@ -121,6 +126,7 @@ class run(object):
 
                     # finnaly <-- executing script -->
                     try:
+                        print (imp)
                         exec (imp)
                     except Exception as e:
                         self.logger.critical(str(e))
