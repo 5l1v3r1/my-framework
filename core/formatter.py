@@ -21,10 +21,11 @@ def listing_files(startpath):
         for i in file:
             x = os.path.join(dirpath, i)[8:-3]
             if '__pycache__' not in x:
-                if _check('modules/{}.py'.format(x)):
-                    files.append(x)
-                else:
-                    _add_warn('modules/{}.py'.format(x))
+                if x[-3:] == '.py':
+                    if _check('modules/{}.py'.format(x)):
+                        files.append(x)
+                    else:
+                        _add_warn('modules/{}.py'.format(x))
     return files
 
 # <-- read config -->
