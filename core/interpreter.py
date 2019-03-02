@@ -33,7 +33,7 @@ class run(object):
     # <-- basic -->
     def _get_default(self):
         # <-- get parameter and value -->
-        default = build_exec.Build('modules/{}.py'.format(self.name))[0]
+        default, self.log = build_exec.Build('modules/{}.py'.format(self.name))
         temp = dict(re.findall(r'(?i):> (.*?): (.*?)\n',
                 open('modules/{}.py'.format(self.name)).read()))
 
@@ -117,7 +117,7 @@ class run(object):
 
                     # <-- generating script -->
                     imp += ', '.join(['{0}="{1}"'.format(i, self.default[i]) for i in self.default])
-                    if re.search('def __init__\(.*?, logging\)', open('modules/{}.py'.format(self.name)).read()):
+                    if self.log:
                         imp += ', logging=self.logger'
                     imp += ')'
 
