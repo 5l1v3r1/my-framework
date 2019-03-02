@@ -154,6 +154,7 @@ class run(object):
 
         try:
             self.logger.info('run as interactive shell, type help for more information!')
+            self.logger.info('follow me: https://m.facebook.com/zvtyrdt.id')
             while True:
                 inp = input('{0} >> '.format(self.codename))
 
