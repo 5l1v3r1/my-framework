@@ -10,7 +10,7 @@ bisa dilihat didalam file modules/other/form_parser.py
 
 function wajib agar module bisa dibaca oleh interpreter:
 >>> def __init__(url): # bisa menambahkan parameter maupun
->>>                 # logging di dalamnya
+>>>                    # logging di dalamnya
 >>>     """
 >>>     ini bagian untuk default parameternya
 >>>     :> url: https://github.com/zevtyardt/my-framework
@@ -20,6 +20,12 @@ function wajib agar module bisa dibaca oleh interpreter:
 
 dan untuk deskripsi dari parameter dapat ditambahkan
 didalam file conf.ini dengan format <param> = <deskripsi>
+
+TODO: dapat menambahkan nama author di setiap module
+      tambahkan dibawah deskripsi module
+
+>>> # desc: this is my module
+>>> # author: zvtyrdt.id
 
 ==========================================================
 
