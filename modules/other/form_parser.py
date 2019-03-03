@@ -1,5 +1,6 @@
 #!usr/bin/python
 # desc: regex form parser
+# author: zvtyrdt.id
 
 import re
 import requests
