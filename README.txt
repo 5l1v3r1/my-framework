@@ -1,3 +1,5 @@
+==========================================================
+
 demo dan cara penggunaan, run diterminal (termux)
 
 $ pkg install asciinema
@@ -26,3 +28,5 @@ berkontribusi dalam project ini bisa membaca dasarnya
 terlebih dahulu. disini
 
 https://www.petanikode.com/github-workflow/
+
+==========================================================
