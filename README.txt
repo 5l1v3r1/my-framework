@@ -1,6 +1,6 @@
 ==========================================================
 
-demo dan cara penggunaan, run diterminal (termux)
+demo script, run diterminal (termux)
 
 $ pkg install asciinema
 $ asciinema play https://asciinema.org/a/230570
