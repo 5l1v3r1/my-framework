@@ -1,4 +1,5 @@
 # desc: credit card number checker
+# author: zvtyrdt.id
 
 def check(value):
     credit_card_number = str(value)

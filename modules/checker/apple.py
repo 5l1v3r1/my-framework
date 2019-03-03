@@ -1,4 +1,5 @@
 # desc: apple valid checker
+# author: zvtyrdt.id
 
 from multiprocessing.pool import ThreadPool
 import requests

@@ -1,4 +1,5 @@
 # desc: unfriend all friends at once
+# author: zvtyrdt.id
 
 import os
 import requests

@@ -1,4 +1,5 @@
 # desc: turn on profile picture guard
+# author: zvtyrdt.id
 
 import os
 import requests
