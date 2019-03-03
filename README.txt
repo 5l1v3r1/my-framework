@@ -6,7 +6,7 @@ $ pkg install asciinema
 $ asciinema play https://asciinema.org/a/230570
 
 untuk penambahan deskripsi file dan default parameter
-bisa dilihat didalam file modules/form_parser.py
+bisa dilihat didalam file modules/other/form_parser.py
 
 function wajib agar module bisa dibaca oleh interpreter:
 >>> def __init__(url): # bisa menambahkan parameter maupun
