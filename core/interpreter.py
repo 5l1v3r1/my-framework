@@ -80,15 +80,20 @@ class run(object):
 
     # <-- load -->
     def _load_module(self):
+        # <-- data -->
         author_name = self._author()
         self.default = self._get_default()
         subcommand = {'help': self._print_sub_help,
                       'show': self._print_options }
         mod = self.name.split('/')
 
+        text_text = 'load scripts from modules/{}.py'.format(self.name)
         if author_name:
-            self.logger.info('this module was created by %s', author_name[0])
+            text_text += ' | author: {}'.format(author_name[0])
 
+        self.logger.info(text_text)
+
+        # <-- shell -->
         if len(mod) >= 2:
             text = '{0} {1}(\x1b[31m{2}\x1b[0m) >> '.format(
                          self.codename, '.'.join(mod[0:-1]), mod[-1])
@@ -171,7 +176,6 @@ class run(object):
 
                 elif inp in self.zerodiv:
                     self.name = inp[4:]
-                    self.logger.info('load scripts from modules/%s.py', self.name)
                     self._load_module()
         except KeyboardInterrupt:
             self.logger.error('interrupt by user.. exiting')
