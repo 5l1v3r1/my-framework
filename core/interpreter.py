@@ -31,6 +31,10 @@ def setup_logger():
 
 class run(object):
     # <-- basic -->
+    def _author(self):
+        cnt = open('modules/{}.py'.format(self.name)).read()
+        return re.findall('# author: (.*?)\n', cnt)
+
     def _get_default(self):
         # <-- get parameter and value -->
         default, self.log = build_exec.Build('modules/{}.py'.format(self.name))
@@ -76,11 +80,15 @@ class run(object):
 
     # <-- load -->
     def _load_module(self):
+        author_name = self._author()
         self.default = self._get_default()
         subcommand = {'help': self._print_sub_help,
                       'show': self._print_options }
-
         mod = self.name.split('/')
+
+        if author_name:
+            self.logger.info('this module was created by %s', author_name[0])
+
         if len(mod) >= 2:
             text = '{0} {1}(\x1b[31m{2}\x1b[0m) >> '.format(
                          self.codename, '.'.join(mod[0:-1]), mod[-1])
@@ -163,7 +171,7 @@ class run(object):
 
                 elif inp in self.zerodiv:
                     self.name = inp[4:]
-                    self.logger.info('load module %s', self.name)
+                    self.logger.info('load scripts from modules/%s.py', self.name)
                     self._load_module()
         except KeyboardInterrupt:
             self.logger.error('interrupt by user.. exiting')

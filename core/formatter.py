@@ -71,8 +71,8 @@ class Formatter(object):
         else:
             lenght = [ max([len(i) for i in default] + [5]),
                        max([len(str(default[i])) for i in default] + [5])]
-            if lenght[1] >= 23:
-                lenght[1] = 23
+            if lenght[1] >= 25:
+                lenght[1] = 25
             F = '   {0:<%s}   {1:<%s}   {2}' % (lenght[0], lenght[1])
 
             print ('\n' + \
@@ -86,6 +86,6 @@ class Formatter(object):
                     desc = 'built-in Object'
 
                 print (F.format(i,
-                       value if len(value) < 23 else '{}..'.format(value[:21]),
+                       value if len(value) < 25 else '{}..'.format(value[:23]),
                        desc))
             print ('')
