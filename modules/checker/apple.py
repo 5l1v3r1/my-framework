@@ -59,7 +59,7 @@ def check(i):
 
     print(ui)
 
-def __init__(threads, file, logging):
+def __zvm__(threads, file, logging):
     """
     :> threads: 2
     """

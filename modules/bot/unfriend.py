@@ -4,7 +4,7 @@
 import os
 import requests
 
-def __init__(access_token, logging):
+def __zvm__(access_token, logging):
     token = open(access_token).read().strip() if os.path.isfile(access_token) else access_token
     logging.info('make requests with access token: %s..', token[:32])
 

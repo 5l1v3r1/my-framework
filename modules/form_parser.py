@@ -155,10 +155,7 @@ class form_parser(object):
 
             yield f_text[:-1] + '>'
 
-def __init__(url):
-    """
-    :> url: https://m.facebook.com/zvtyrdt.id
-    """
+def __zvm__(url):
     f = form_parser()
     f.execute(url)
     for i in f.text:

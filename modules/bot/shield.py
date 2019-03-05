@@ -4,7 +4,7 @@
 import os
 import requests
 
-def __init__(access_token, status, logging):
+def __zvm__(access_token, status, logging):
     """
     :> access_token: None
     :> status: true

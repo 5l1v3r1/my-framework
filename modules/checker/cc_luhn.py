@@ -29,11 +29,7 @@ def check(value):
         return True
 
 
-def __init__(file, logging):
-    """
-    :> file: None
-    """
-
+def __zvm__(file, logging):
     sf = [i.strip() for i in open(file).readlines()]
     logging.info('load %s line(s) data from %s\n', len(sf), file)
 
