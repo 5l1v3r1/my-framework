@@ -122,10 +122,10 @@ class run(object):
 
                     # first ( reinitializing ) <-- generating script -->
                     if len(mod) >= 2:
-                        imp = 'from modules.{0} import {1}; {1}.__init__('.format(
+                        imp = 'from modules.{0} import {1}; {1}.__zvm__('.format(
                              '.'.join(mod[0:-1]), mod[-1])
                     else:
-                        imp = 'from modules import {0}; {0}.__init__('.format(mod[0])
+                        imp = 'from modules import {0}; {0}.__zvm__('.format(mod[0])
 
 
                     # <-- generating script -->

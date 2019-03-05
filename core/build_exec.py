@@ -2,7 +2,7 @@ import re
 
 def Build(file):
     file = open(file).read()
-    base = re.findall(r'def __init__\((.*?)\)', file)[-1]
+    base = re.findall(r'def __zvm__\((.*?)\)', file)[-1]
     log = False
 
     if base.endswith(', logging'):
