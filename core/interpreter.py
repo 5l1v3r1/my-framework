@@ -1,3 +1,6 @@
+#!usr/bin/python
+# encoding: utf-8
+
 from . import formatter
 from . import build_exec
 import sys
@@ -6,6 +9,7 @@ import logging
 import colorlog
 import readline
 
+__version__ = '0.1.1 #dev'
 f = formatter.Formatter()
 
 def setup_logger():
@@ -53,14 +57,28 @@ class run(object):
         # <-- returning data -->
         return default
 
-    def _print_modules(self):
-        f.modules(self.modules)
+    def _print_modules(self, mod=None):
+        if not mod:
+            mod = self.modules
+        f.modules(mod)
 
     def _print_help(self):
         f.help(help='show this help message',
-               modules='list a module',
+               modules='list all modules',
+               search='search module based on keywords',
                use='load script, module name is needed',
                exit='exit the interactive shell')
+
+    def _search(self, key):
+        dat = []
+        for i in self.modules:
+            if key in i:
+                dat.append(i)
+        if dat:
+            print (f'\n# found {len(dat)} modules')
+            self._print_modules(dat)
+        else:
+            self.logger.error('no module based on keywords')
 
     # <-- sub -->
     def _print_sub_help(self):
@@ -89,7 +107,7 @@ class run(object):
 
         text_text = 'load scripts from modules/{}.py'.format(self.name)
         if author_name:
-            text_text += ' | author: {}'.format(author_name[0])
+            text_text += '\n    author: {}'.format(author_name[0])
 
         self.logger.info(text_text)
 
@@ -112,7 +130,7 @@ class run(object):
                     if set_[1] != 'logging':
                         new_value = ' '.join(set_[2:])
                         self.default[set_[1]] = new_value
-                        self.logger.info('%s => %s', set_[1], new_value)
+                        self.logger.info(f'{set_[1]} => {new_value}')
                     else:
                         self.logger.warning('can\'t change built-in Object')
 
@@ -147,7 +165,7 @@ class run(object):
                 else:
                     for i in self.default:
                         if str(self.default[i]) == 'None':
-                            self.logger.error('%s: parameter can\'t be empty', i); break
+                            self.logger.error(f'{i}: parameter can\'t be empty'); break
 
             elif inp == 'back':
                 break
@@ -166,14 +184,22 @@ class run(object):
                         'exit': exit}
 
         try:
-            self.logger.info('run as interactive shell, type help for more information!')
-            self.logger.info('follow me: https://m.facebook.com/zvtyrdt.id')
+            print ('\n'.join(
+                   ['\n# run as interactive shell, type help for more information !',
+                    f'# version (\x1b[33m{__version__}\x1b[0m) [ total modules \x1b[31m{len(self.modules)}\x1b[0m ]',
+                    '# author zevtyardt (https://github.com/zevtyardt)',
+                    '# follow me https://m.facebook.com/zvtyrdt.id !\n'
+                   ]))
+
             while True:
                 inp = input('{0} >> '.format(self.codename))
-
                 if inp in self.command:
                     self.command[inp]()
-
+                elif inp[:6] == 'search':
+                    mx = inp.split()
+                    if len(mx) > 1:
+                        rs = ' '.join(mx[1:])
+                        self._search(rs)
                 elif inp in self.zerodiv:
                     self.name = inp[4:]
                     self._load_module()
