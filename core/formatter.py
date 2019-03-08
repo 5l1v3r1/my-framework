@@ -1,3 +1,5 @@
+#!usr/bin/python
+
 from . import build_exec
 import configparser
 import os

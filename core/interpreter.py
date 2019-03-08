@@ -177,7 +177,6 @@ class run(object):
         if not self.modules:
             self.logger.warning('module not found !!')
             sys.exit(self.logger.info("tips: create a 'modules' folder and add a new module there"))
-
         self.zerodiv = ['use {}'.format(ex) for ex in self.modules]
         self.command = {'help': self._print_help,
                         'modules': self._print_modules,
