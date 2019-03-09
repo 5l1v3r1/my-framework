@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from pprint import pformat
+import os
 
 # desc: change string to emoji
 # author: Chris Rands
@@ -37,9 +38,13 @@ def main(in_file, out_file):
         # This assumes it's ok to read the entire input file into memory
         out_f.write(encode_string(in_f.read(), EMOTICONS))
 
-def __zvm__(input, output, logging):
+def __zvm__(file, output, logging):
     """
     :> output: out.py
     """
-    main(input, output)
-    logging.info(f'saved as {output}')
+    if os.path.isfile:
+        logging.info(f'obfuscating file {file}')
+        main(input, output)
+        logging.info(f'saved as {output}')
+    else:
+       logging.critical(f"[Errno 2] No such file or directory: '{file}'")
