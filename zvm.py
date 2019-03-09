@@ -1,11 +1,1 @@
-#!usr/bin/python
-# encoding: utf-8
-
-"""
-coded by zevtyardt @ 18:23:21 /2019-02-16/
-"""
-
-from core import interpreter
-
-if __name__ == '__main__':
-     interpreter.run()
+(lambda __g: [('\ncoded by zevtyardt @ 18:23:21 /2019-02-16/\n', (lambda __mod: [(lambda __after: (interpreter.run(), __after())[1] if (__name__ == '__main__') else __after())(lambda: None) for __g['interpreter'] in [(__mod.interpreter)]][0])(__import__('core', __g, __g, ('interpreter',), 0)))[1] for __g['__doc__'] in [('\ncoded by zevtyardt @ 18:23:21 /2019-02-16/\n')]][0])(globals())
