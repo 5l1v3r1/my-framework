@@ -178,8 +178,8 @@ class run(object):
                         'exit': exit}
 
         list_text = [
-            f'# \x1b[31m@\x1b[0mzvm (\x1b[33m{__version__}\x1b[0m) [ \x1b[36m{len(self.modules)}\x1b[0m modules ]',
-            f'# \x1b[31m@\x1b[0m{__author__} (https://github.com/zevtyardt)',
+            f'# zvm (\x1b[33m{__version__}\x1b[0m) [ \x1b[36m{len(self.modules)}\x1b[0m modules ]',
+            f'# {__author__} (https://github.com/zevtyardt)',
              '# follow me https://m.facebook.com/zvtyrdt.id !\n'
             ]
 
