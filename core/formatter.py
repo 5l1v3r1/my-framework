@@ -38,9 +38,9 @@ conf.read('conf.ini')
 
 class Formatter(object):
     def modules(self, body, head=None):
-        F = '  {0:<%s}  {1}' %  max([len(i) for i in body] + [6])
-        print ('\n' + F.format('module', 'description') + \
-               '\n' + F.format('======', '==========='))
+        F = '  {0:<%s}  {1}' %  max([len(i) for i in body] + [4])
+        print ('\n' + F.format('name', 'description') + \
+               '\n' + F.format('----', '-----------'))
         for name in body:
             desc = re.findall(r'# desc: (.*?)\n', open('modules/{}.py'.format(name)).read())
             if not desc:
@@ -54,7 +54,7 @@ class Formatter(object):
         F = '  {0:<%s}  {1}' % lenght
 
         print ('\n' + F.format('option', 'description') + \
-               '\n' + F.format('======', '==========='))
+               '\n' + F.format('------', '-----------'))
         for i in kwargs:
             print (F.format(i, kwargs[i]))
         print ('') # new line
@@ -71,7 +71,7 @@ class Formatter(object):
 
             print ('\n' + \
                    F.format('param', 'value', 'description') + '\n' + \
-                   F.format('=====', '=====', '==========='))
+                   F.format('-----', '-----', '-----------'))
 
             for i in default:
                 value = str(default[i]).replace('None', '')

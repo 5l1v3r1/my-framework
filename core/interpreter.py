@@ -9,7 +9,10 @@ import logging
 import colorlog
 import readline
 
+# <-- data -->
 __version__ = '0.1.1 #dev'
+__author__ = 'zevtyardt'
+
 f = formatter.Formatter()
 
 def setup_logger():
@@ -35,10 +38,6 @@ def setup_logger():
 
 class run(object):
     # <-- basic -->
-    def _author(self):
-        cnt = open('modules/{}.py'.format(self.name)).read()
-        return re.findall('# author: (.*?)\n', cnt)
-
     def _get_default(self):
         # <-- get parameter and value -->
         default, self.log = build_exec.Build('modules/{}.py'.format(self.name))
@@ -99,17 +98,12 @@ class run(object):
     # <-- load -->
     def _load_module(self):
         # <-- data -->
-        author_name = self._author()
         self.default = self._get_default()
         subcommand = {'help': self._print_sub_help,
                       'show': self._print_options }
+
         mod = self.name.split('/')
-
-        text_text = 'load scripts from modules/{}.py'.format(self.name)
-        if author_name:
-            text_text += '\n    author: {}'.format(author_name[0])
-
-        self.logger.info(text_text)
+        self.logger.info(f'load scripts from modules/{self.name}.py')
 
         # <-- shell -->
         if len(mod) >= 2:
@@ -118,6 +112,7 @@ class run(object):
         else:
             text = '{0} general(\x1b[31m{1}\x1b[0m) >> '.format(self.codename, self.name)
 
+        # <-- interpreter -->
         while True:
             inp = input(text)
             set_ = inp.split()
@@ -182,14 +177,14 @@ class run(object):
                         'modules': self._print_modules,
                         'exit': exit}
 
-        try:
-            print ('\n'.join(
-                   ['\n# run as interactive shell, type help for more information !',
-                    f'# version (\x1b[33m{__version__}\x1b[0m) [ total modules \x1b[31m{len(self.modules)}\x1b[0m ]',
-                    '# author zevtyardt (https://github.com/zevtyardt)',
-                    '# follow me https://m.facebook.com/zvtyrdt.id !\n'
-                   ]))
+        list_text = [
+            f'# \x1b[31m@\x1b[0mzvm (\x1b[33m{__version__}\x1b[0m) [ \x1b[36m{len(self.modules)}\x1b[0m modules ]',
+            f'# \x1b[31m@\x1b[0m{__author__} (https://github.com/zevtyardt)',
+             '# follow me https://m.facebook.com/zvtyrdt.id !\n'
+            ]
 
+        try:
+            print ('\n' + '\n'.join(list_text))
             while True:
                 inp = input('{0} >> '.format(self.codename))
                 if inp in self.command:
