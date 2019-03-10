@@ -12,7 +12,9 @@ text_warn = '# add function __zvm__ with one or more parameters\n# example:\n# >
 def _check(file):
     if os.path.isfile(file):
         cnt = open(file).read()
-        return re.search(r'\ndef __zvm__\(.*?\)', cnt)
+        s = re.findall(r'(def __zvm__\(.*?\))', cnt)
+        if s:
+            return '(param)' not in s[0]
 
 def _add_warn(file):
     file_content = open(file).read()
